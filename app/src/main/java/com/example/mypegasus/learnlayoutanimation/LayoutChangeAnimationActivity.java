@@ -1,12 +1,18 @@
 package com.example.mypegasus.learnlayoutanimation;
 
 import android.animation.AnimatorInflater;
+import android.animation.ArgbEvaluator;
 import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -27,7 +33,31 @@ public class LayoutChangeAnimationActivity extends AppCompatActivity {
 		rootView = (LinearLayout) findViewById(R.id.rootView);
 
 		LayoutTransition transition = new LayoutTransition();
-		transition.setAnimator(LayoutTransition.APPEARING, AnimatorInflater.loadAnimator(this, R.animator.scale_object_animator));
+//		ObjectAnimator oa = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.scale_object_animator);
+		/*ObjectAnimator oa = ObjectAnimator.ofFloat(this, "rotationX", 0f, 20f);
+		oa.setRepeatCount(50);
+		oa.setRepeatMode(ValueAnimator.REVERSE);*/
+
+		ObjectAnimator oa = ObjectAnimator.ofInt(this,
+				"backgroundColor", Color.RED, Color.BLUE, Color.GRAY,
+				Color.GREEN);
+		oa.setInterpolator(new DecelerateInterpolator());
+		oa.setDuration(1500);
+		oa.setRepeatCount(-1);
+		oa.setRepeatMode(ValueAnimator.REVERSE);
+		/*
+		 * ArgbEvaluator：这种评估者可以用来执行类型之间的插值整数值代表ARGB颜色。
+		 * FloatEvaluator：这种评估者可以用来执行浮点值之间的插值。
+		 * IntEvaluator：这种评估者可以用来执行类型int值之间的插值。
+		 * RectEvaluator：这种评估者可以用来执行类型之间的插值矩形值。
+		 *
+		 * 由于本例是改变View的backgroundColor属性的背景颜色所以此处使用ArgbEvaluator
+		 */
+
+		oa.setEvaluator(new ArgbEvaluator());
+
+
+		transition.setAnimator(LayoutTransition.APPEARING, oa);
 		rootView.setLayoutTransition(transition);
 
 	}
