@@ -2,6 +2,7 @@ package com.example.mypegasus.learnlayoutanimation;
 
 import android.animation.AnimatorInflater;
 import android.animation.ArgbEvaluator;
+import android.animation.FloatEvaluator;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -34,17 +35,17 @@ public class LayoutChangeAnimationActivity extends AppCompatActivity {
 
 		LayoutTransition transition = new LayoutTransition();
 //		ObjectAnimator oa = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.scale_object_animator);
-		/*ObjectAnimator oa = ObjectAnimator.ofFloat(this, "rotationX", 0f, 20f);
+		ObjectAnimator oa = ObjectAnimator.ofFloat(this, "rotationX", 0f, 20f);
 		oa.setRepeatCount(50);
-		oa.setRepeatMode(ValueAnimator.REVERSE);*/
+		oa.setRepeatMode(ValueAnimator.REVERSE);
 
-		ObjectAnimator oa = ObjectAnimator.ofInt(this,
+		/*ObjectAnimator oa = ObjectAnimator.ofInt(this,
 				"backgroundColor", Color.RED, Color.BLUE, Color.GRAY,
 				Color.GREEN);
 		oa.setInterpolator(new DecelerateInterpolator());
 		oa.setDuration(1500);
 		oa.setRepeatCount(-1);
-		oa.setRepeatMode(ValueAnimator.REVERSE);
+		oa.setRepeatMode(ValueAnimator.REVERSE);*/
 		/*
 		 * ArgbEvaluator：这种评估者可以用来执行类型之间的插值整数值代表ARGB颜色。
 		 * FloatEvaluator：这种评估者可以用来执行浮点值之间的插值。
@@ -54,8 +55,7 @@ public class LayoutChangeAnimationActivity extends AppCompatActivity {
 		 * 由于本例是改变View的backgroundColor属性的背景颜色所以此处使用ArgbEvaluator
 		 */
 
-		oa.setEvaluator(new ArgbEvaluator());
-
+//		oa.setEvaluator(new ArgbEvaluator());
 
 		transition.setAnimator(LayoutTransition.APPEARING, oa);
 		rootView.setLayoutTransition(transition);
